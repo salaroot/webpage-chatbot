@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Page Deck AI",
+  "version": "0.1.0",
+  "description": "A private, page-informed AI assistant in Chrome's side panel.",
+  "permissions": ["sidePanel", "storage", "tabs", "scripting", "activeTab"],
+  "host_permissions": ["<all_urls>"],
+  "background": { "service_worker": "background.js", "type": "module" },
+  "side_panel": { "default_path": "sidepanel.html" },
+  "action": { "default_title": "Open Page Deck AI" },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; connect-src https://api.openai.com https://api.anthropic.com https://generativelanguage.googleapis.com"
+  }
+}

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Page Deck AI</title>
+    <link rel="stylesheet" href="sidepanel.css">
+  </head>
+  <body>
+    <header>
+      <div><h1>Page Deck AI</h1><p>Research from the pages already open in your browser.</p></div>
+      <button id="settingsButton" class="icon-button" title="Settings" aria-label="Settings">⚙</button>
+    </header>
+
+    <section id="settings" class="settings" hidden>
+      <label>Provider <select id="provider"><option value="openai">OpenAI</option><option value="anthropic">Anthropic</option><option value="gemini">Google Gemini</option></select></label>
+      <label>Model <input id="model" placeholder="gpt-4.1-mini"></label>
+      <label>API key <input id="apiKey" type="password" autocomplete="off" placeholder="Stored locally in Chrome"></label>
+      <label>Context warning (tokens) <input id="tokenLimit" type="number" min="500" step="500"></label>
+      <p class="note">Your API key and captured content remain in this browser profile. Requests go directly to your chosen provider.</p>
+      <button id="saveSettings">Save settings</button>
+    </section>
+
+    <main>
+      <section class="deck-section">
+        <div class="section-heading"><h2>Session deck</h2><button id="capturePage">+ Capture active page</button></div>
+        <p id="emptyDeck" class="muted">Capture pages you want to use as context.</p>
+        <div id="deck" class="deck"></div>
+      </section>
+
+      <section id="sectionsSection" hidden>
+        <div class="section-heading"><h2>Included sections</h2><button id="allSections" class="quiet">Select all</button></div>
+        <p class="muted">Uncheck headings you do not want to send.</p>
+        <div id="sections" class="sections"></div>
+      </section>
+
+      <section class="compose">
+        <label class="selection-toggle"><input id="selectionOnly" type="checkbox"> Use selected text from active page only</label>
+        <textarea id="prompt" rows="4" placeholder="Ask about your selected pages…"></textarea>
+        <div class="compose-footer"><span id="tokenEstimate">0 estimated tokens</span><button id="send">Send</button></div>
+        <p id="warning" class="warning" hidden></p>
+      </section>
+
+      <section id="conversation" class="conversation" aria-live="polite"></section>
+    </main>
+    <template id="pageTemplate"><article class="page-card"><label><input class="page-check" type="checkbox"><span class="page-title"></span></label><button class="remove-page" title="Remove">×</button><small class="page-url"></small></article></template>
+    <script type="module" src="sidepanel.js"></script>
+  </body>
+</html>
